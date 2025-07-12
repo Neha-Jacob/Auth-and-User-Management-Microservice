@@ -6,11 +6,17 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
+sqlalchemy = "*"
+psycopg2-binary = "*"
+alembic = "*"
+python-dotenv = "*"
+pydantic-settings = "*"
 
 [dev-packages]
 pytest = "*"
 black = "*"
 isort = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.11"
