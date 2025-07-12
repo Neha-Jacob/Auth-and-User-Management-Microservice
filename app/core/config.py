@@ -1,5 +1,6 @@
-from pydantic import BaseSettings, PostgresDsn
+from pydantic_settings import BaseSettings
 from typing import Optional
+from functools import lru_cache
 
 
 class Settings(BaseSettings):
@@ -14,11 +15,14 @@ class Settings(BaseSettings):
     @property
     def database_url(self) -> str:
         return (
-            f"postgresql://{self.postgres_user}:{self.postgres_password}@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
+            f"postgresql://{self.postgres_user}:{self.postgres_password}"
+            f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
         )
 
     class Config:
         env_file = ".env"
 
 
-settings = Settings()
+@lru_cache()
+def get_settings():
+    return Settings()
